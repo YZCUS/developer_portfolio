@@ -11,7 +11,7 @@ export const personalInfo = {
 
     bio: {
         title: "Software Engineer with an M.S. in Computer Science from NYU, specializing in Java, Spring Boot, and full‑stack development.",
-        subtitle: "Graduated in May 2025. Actively seeking full‑time Software Engineer roles to build scalable, reliable systems."
+        subtitle: "Graduated in May 2025. Actively seeking Full‑Time Software Engineer roles to build scalable, reliable systems."
     },
 
     contactMessage: "I'm actively seeking full‑time Software Engineer roles (backend/platform/full‑stack). Let's connect to discuss how I can contribute to your team.",
