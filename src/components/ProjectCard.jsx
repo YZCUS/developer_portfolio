@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Card, Tag, Button, Typography, Divider } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 
@@ -6,19 +6,6 @@ const { Title, Paragraph, Text } = Typography;
 
 const ProjectCard = ({ project, index }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const [hasOverflow, setHasOverflow] = useState(false);
-    const descRef = useRef(null);
-
-    useEffect(() => {
-        const el = descRef.current;
-        if (!el) return;
-        // detect overflow to decide whether to show fade mask
-        const checkOverflow = () => setHasOverflow(el.scrollHeight > el.clientHeight + 1);
-        checkOverflow();
-        // recheck on window resize
-        window.addEventListener('resize', checkOverflow);
-        return () => window.removeEventListener('resize', checkOverflow);
-    }, []);
 
     // Generate gradient colors for project covers
     const gradients = [
@@ -128,12 +115,8 @@ const ProjectCard = ({ project, index }) => {
             bodyStyle={{ padding: '24px', display: 'flex', flexDirection: 'column', flex: 1 }}
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
-                {/* Description with max-height and fade mask */}
-                <div
-                    ref={descRef}
-                    className={`project-desc-wrapper collapsed`}
-                    style={{ position: 'relative' }}
-                >
+                {/* Description with fixed height and scroll */}
+                <div className="project-desc-scroll" style={{ position: 'relative' }}>
                     <Paragraph
                         style={{
                             fontSize: '15px',
@@ -144,7 +127,6 @@ const ProjectCard = ({ project, index }) => {
                     >
                         {project.description}
                     </Paragraph>
-                    {hasOverflow && <div className="project-desc-fade" aria-hidden="true" />}
                 </div>
 
                 <Divider style={{ margin: 0 }} />

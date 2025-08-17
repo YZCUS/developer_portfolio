@@ -118,31 +118,22 @@ body {
   /* keep edges flush with actions container */
 }
 
-/* Project description clamp with fade mask */
-.project-desc-wrapper.collapsed {
-  max-height: 96px;
-  /* ~4 lines depending on font-size/line-height */
-  overflow: hidden;
+/* Project description fixed-height scrollable */
+.project-desc-scroll {
+  max-height: 128px;
+  /* adjust to preferred fixed height */
+  overflow: auto;
+  padding-right: 4px;
+  /* avoid text hitting scrollbar */
 }
 
-.project-desc-wrapper .ant-typography {
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.project-desc-scroll::-webkit-scrollbar {
+  width: 6px;
 }
 
-.project-desc-wrapper .ant-typography p {
-  margin: 0;
-}
-
-.project-desc-fade {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 36px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+.project-desc-scroll::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 3px;
 }
 
 /* Progress circle styling */
