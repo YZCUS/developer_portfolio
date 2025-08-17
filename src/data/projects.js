@@ -1,9 +1,9 @@
 export const projects = [
     {
-        title: 'Hotel Reservation Web Application',
-        description: 'Developed a backend server using Java and Spring Boot with JPA/Hibernate, designing 10+ REST APIs for core application services supporting 1,000+ concurrent users with 99.5% uptime.',
-        technologies: ['Java', 'Spring Boot', 'React', 'REST API', 'PostgreSQL', 'Docker', 'JUnit'],
-        github: 'https://github.com/YZCUS/hotel_reservation_system_backend',
+        title: 'Scalable Hotel Booking Microservice',
+        description: 'A modern, containerized microservices system for hotel reservations. It’s designed to run cost‑efficiently on a single host (EC2 instance) while keeping a clean path to horizontal scaling.',
+        technologies: ['Java', 'Spring Boot', 'React', 'REST API', 'PostgreSQL', 'Docker', 'JUnit', 'Microservices'],
+        github: 'https://github.com/YZCUS/hotel-booking-microservice',
         demo: 'https://hotel-reservation.example.com'
     },
     {
