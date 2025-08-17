@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, Tag, Button, Typography, Divider } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 
@@ -6,7 +6,19 @@ const { Title, Paragraph, Text } = Typography;
 
 const ProjectCard = ({ project, index }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [hasOverflow, setHasOverflow] = useState(false);
+    const descRef = useRef(null);
+
+    useEffect(() => {
+        const el = descRef.current;
+        if (!el) return;
+        // detect overflow to decide whether to show fade mask
+        const checkOverflow = () => setHasOverflow(el.scrollHeight > el.clientHeight + 1);
+        checkOverflow();
+        // recheck on window resize
+        window.addEventListener('resize', checkOverflow);
+        return () => window.removeEventListener('resize', checkOverflow);
+    }, []);
 
     // Generate gradient colors for project covers
     const gradients = [
@@ -118,7 +130,8 @@ const ProjectCard = ({ project, index }) => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
                 {/* Description with max-height and fade mask */}
                 <div
-                    className={`project-desc-wrapper ${isExpanded ? 'expanded' : 'collapsed'}`}
+                    ref={descRef}
+                    className={`project-desc-wrapper collapsed`}
                     style={{ position: 'relative' }}
                 >
                     <Paragraph
@@ -131,18 +144,8 @@ const ProjectCard = ({ project, index }) => {
                     >
                         {project.description}
                     </Paragraph>
-                    {!isExpanded && <div className="project-desc-fade" aria-hidden="true" />}
+                    {hasOverflow && <div className="project-desc-fade" aria-hidden="true" />}
                 </div>
-
-                <Button
-                    type="link"
-                    size="small"
-                    onClick={() => setIsExpanded(prev => !prev)}
-                    aria-expanded={isExpanded}
-                    style={{ alignSelf: 'flex-start', paddingLeft: 0 }}
-                >
-                    {isExpanded ? 'Show less' : 'Show more'}
-                </Button>
 
                 <Divider style={{ margin: 0 }} />
 
