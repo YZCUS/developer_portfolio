@@ -1,7 +1,7 @@
 export const projects = [
     {
         title: 'Scalable Hotel Booking Microservice',
-        description: 'A modern, containerized microservices system for hotel reservations. It’s designed to run cost‑efficiently on a single host (EC2 instance) while keeping a clean path to horizontal scaling.',
+        description: 'A modern, containerized microservices system for hotel reservations. It’s designed to run cost‑efficiently on a single host (EC2) while keeping a clean path to horizontal scaling.',
         technologies: ['Java', 'Spring Boot', 'React', 'REST API', 'PostgreSQL', 'Docker', 'JUnit', 'Microservices'],
         github: 'https://github.com/YZCUS/hotel-booking-microservice',
         demo: 'https://hotel-reservation.example.com'
