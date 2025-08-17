@@ -6,6 +6,7 @@ const { Title, Paragraph, Text } = Typography;
 
 const ProjectCard = ({ project, index }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     // Generate gradient colors for project covers
     const gradients = [
@@ -24,6 +25,8 @@ const ProjectCard = ({ project, index }) => {
             hoverable
             style={{
                 height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
                 borderRadius: '16px',
                 overflow: 'hidden',
                 transform: isHovered ? 'translateY(-12px)' : 'translateY(0)',
@@ -110,24 +113,41 @@ const ProjectCard = ({ project, index }) => {
                     Code
                 </Button>
             ]}
-            bodyStyle={{ padding: '24px' }}
+            bodyStyle={{ padding: '24px', display: 'flex', flexDirection: 'column', flex: 1 }}
         >
-            <div style={{ minHeight: '160px' }}>
-                <Paragraph
-                    style={{
-                        fontSize: '15px',
-                        lineHeight: '1.6',
-                        marginBottom: '16px',
-                        color: '#666',
-                    }}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
+                {/* Description with max-height and fade mask */}
+                <div
+                    className={`project-desc-wrapper ${isExpanded ? 'expanded' : 'collapsed'}`}
+                    style={{ position: 'relative' }}
                 >
-                    {project.description}
-                </Paragraph>
+                    <Paragraph
+                        style={{
+                            fontSize: '15px',
+                            lineHeight: '1.6',
+                            margin: 0,
+                            color: '#666',
+                        }}
+                    >
+                        {project.description}
+                    </Paragraph>
+                    {!isExpanded && <div className="project-desc-fade" aria-hidden="true" />}
+                </div>
 
-                <Divider style={{ margin: '16px 0' }} />
+                <Button
+                    type="link"
+                    size="small"
+                    onClick={() => setIsExpanded(prev => !prev)}
+                    aria-expanded={isExpanded}
+                    style={{ alignSelf: 'flex-start', paddingLeft: 0 }}
+                >
+                    {isExpanded ? 'Show less' : 'Show more'}
+                </Button>
+
+                <Divider style={{ margin: 0 }} />
 
                 {/* Technology stack */}
-                <div style={{ marginBottom: '16px' }}>
+                <div>
                     <Text strong style={{ fontSize: '14px', color: '#333', marginBottom: '8px', display: 'block' }}>
                         Tech Stack:
                     </Text>
@@ -151,8 +171,6 @@ const ProjectCard = ({ project, index }) => {
                         ))}
                     </div>
                 </div>
-
-                {/* Removed project stats section per request */}
             </div>
         </Card>
     );
