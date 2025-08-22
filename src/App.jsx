@@ -1,9 +1,10 @@
-import React from 'react';
-import { Layout, Menu, Avatar, Row, Col, Typography, Button, Space, Divider, Timeline } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Menu, Avatar, Row, Col, Typography, Button, Space, Divider, Timeline, Drawer, Grid } from 'antd';
 import {
   GithubOutlined,
   LinkedinOutlined,
   MailOutlined,
+  MenuOutlined,
   UserOutlined,
   CodeOutlined,
   TrophyOutlined,
@@ -19,6 +20,9 @@ const { Header, Content, Footer } = Layout;
 const { Title, Paragraph, Text } = Typography;
 
 function App() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const screens = Grid.useBreakpoint();
+  const isMobile = !screens.md;
   // Create icon components from string names
   const iconMap = {
     UserOutlined: <UserOutlined />,
@@ -65,16 +69,41 @@ function App() {
             <div className="brand-logo" aria-hidden="true">{initials}</div>
             <div className="brand-title">{personalInfo.name}</div>
           </a>
-          <Menu
-            theme="light"
-            mode="horizontal"
-            defaultSelectedKeys={['about']}
-            items={processedMenuItems}
-            onClick={handleMenuClick}
-            style={{ border: 'none', flex: 1, justifyContent: 'center' }}
-          />
+          {isMobile ? (
+            <Button
+              type="text"
+              aria-label="Open navigation menu"
+              icon={<MenuOutlined style={{ fontSize: 20 }} />}
+              onClick={() => setIsDrawerOpen(true)}
+            />
+          ) : (
+            <Menu
+              theme="light"
+              mode="horizontal"
+              defaultSelectedKeys={['about']}
+              items={processedMenuItems}
+              onClick={handleMenuClick}
+              style={{ border: 'none', flex: 1, justifyContent: 'center' }}
+            />
+          )}
         </div>
       </Header>
+
+      {/* Mobile navigation drawer */}
+      <Drawer
+        placement="right"
+        width={280}
+        open={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        bodyStyle={{ padding: 0 }}
+      >
+        <Menu
+          mode="inline"
+          items={processedMenuItems}
+          onClick={(e) => { handleMenuClick(e); setIsDrawerOpen(false); }}
+          style={{ border: 'none' }}
+        />
+      </Drawer>
 
       <Content style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', marginTop: 64 }}>
         {/* Hero Section */}
@@ -89,7 +118,7 @@ function App() {
           <Row justify="center" align="middle">
             <Col xs={24} md={16} lg={12} className="hero-content">
               <Avatar
-                size={220}
+                size={screens.md ? 220 : 140}
                 src={personalInfo.avatar}
                 alt={`${personalInfo.name} avatar`}
                 style={{ marginBottom: 24 }}
