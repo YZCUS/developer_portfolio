@@ -365,7 +365,13 @@ div[id] {
 
   /* Timeline adjustments for mobile */
   .ant-timeline-item-content {
-    margin-left: 16px;
+    margin-left: 0;
+    /* full width for content */
+  }
+
+  /* Give timeline cards comfortable spacing on mobile */
+  .ant-timeline .ant-timeline-item {
+    padding-bottom: 24px;
   }
 }
 

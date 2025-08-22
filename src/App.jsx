@@ -164,7 +164,7 @@ function App() {
             <Col xs={24} lg={16}>
               <Timeline mode="left">
                 {experience.map((exp, index) => (
-                  <Timeline.Item key={index} label={exp.period}>
+                  <Timeline.Item key={index} label={isMobile ? undefined : exp.period}>
                     <div style={{
                       background: 'white',
                       padding: '32px',
@@ -182,6 +182,9 @@ function App() {
                         e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.05)';
                       }}
                     >
+                      {isMobile && (
+                        <Text type="secondary" style={{ display: 'block', marginBottom: 8 }}>{exp.period}</Text>
+                      )}
                       <Title level={4} style={{ marginBottom: 8 }}>{exp.title}</Title>
                       <Text strong style={{ color: '#1890ff', fontSize: '16px' }}>{exp.company}</Text>
                       <Paragraph style={{ marginTop: 16, fontSize: '15px', lineHeight: 1.6 }}>{exp.description}</Paragraph>
