@@ -102,14 +102,6 @@ The portfolio is fully responsive with breakpoints for:
 - **Responsive Images**: Optimized image loading from Unsplash
 - **Clean Code Structure**: Modular component architecture
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](issues).
-
 ## 📞 Contact
 
 Allen Yao - [s87610281@gmail.com](mailto:s87610281@gmail.com)
@@ -121,5 +113,3 @@ GitHub: [github.com/YZCUS](https://github.com/YZCUS)
 Project Link: [https://github.com/YZCUS/developer_portfolio](https://github.com/YZCUS/developer_portfolio)
 
 ---
-
-⭐ Don't forget to give this project a star if you found it helpful!
